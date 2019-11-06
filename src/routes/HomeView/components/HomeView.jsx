@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
 // Components
-import { LogoSvg } from '_/components/Svg'
+
+import { WeatherForecast } from '_/components/Forecast'
 
 // Styles
 import './HomeView.scss'
@@ -16,7 +17,7 @@ class HomeView extends Component {
   render() {
     return (
       <div id="HomeView">
-        <LogoSvg className="golisto-logo" />
+        <WeatherForecast />
       </div>
     )
   }
