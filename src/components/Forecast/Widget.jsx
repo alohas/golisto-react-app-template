@@ -4,7 +4,6 @@ import WeatherDetails from './WeatherDetails'
 import UpcomingDays from './UpcomingDays'
 
 const myAPIKey = 'dce6d076b7a2ffe64e08efe5ff779fa3'
-let fetchedData = {}
 
 class Widget extends React.Component {
   constructor(props) {
@@ -50,7 +49,6 @@ class Widget extends React.Component {
               error: data.message,
             })
           } else {
-            fetchedData = data
             this.setState({
               city: data.name,
               country: data.sys.country,
@@ -72,7 +70,7 @@ class Widget extends React.Component {
             day4: data.list[31],
             day5: data.list[39],
           })
-          console.log(this.state)
+          //console.log(this.state)
         })
     } else {
       this.setState({
@@ -88,7 +86,7 @@ class Widget extends React.Component {
         day5: undefined,
         error: 'Please enter the city and country code.',
       })
-      console.log(this.state)
+      //console.log(this.state)
     }
   }
 
@@ -99,6 +97,7 @@ class Widget extends React.Component {
         <h2>Find out now!</h2>
         <div>
           <Form getWeatherData={this.getWeatherData} />
+
           <WeatherDetails
             city={this.state.city}
             country={this.state.country}
@@ -107,7 +106,7 @@ class Widget extends React.Component {
             description={this.state.description}
             error={this.state.error}
           />
-          <UpcomingDays />
+          <UpcomingDays day1={this.state.day1} day2={this.state.day2} day3={this.state.day3} day4={this.state.day4} day5={this.state.day5} />
         </div>
       </div>
     )

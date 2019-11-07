@@ -1,11 +1,6 @@
 import React from 'react'
 
 class Form extends React.Component {
-  // function Form() {
-  // function handleSubmit(e) {
-  //   e.preventDefault()
-  // }
-
   render() {
     return (
       <form onSubmit={this.props.getWeatherData}>
@@ -16,5 +11,5 @@ class Form extends React.Component {
     )
   }
 }
-// }
+
 export default Form

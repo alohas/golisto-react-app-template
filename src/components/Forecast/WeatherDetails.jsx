@@ -5,10 +5,11 @@ class WeatherDetails extends React.Component {
     return (
       <div>
         {this.props.city && this.props.country && (
-          <p>
+          <h3>
             Location: {this.props.city}, {this.props.country}
-          </p>
+          </h3>
         )}
+        {this.props.city && this.props.country && <h4>Today</h4>}
         {this.props.temperature && <p>Temperature: {this.props.temperature}</p>}
         {this.props.humidity && <p>Humidity: {this.props.humidity}</p>}
         {this.props.humidity && <p>Conditions: {this.props.description}</p>}
