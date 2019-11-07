@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import Form from './Form'
 import WeatherDetails from './WeatherDetails'
+import UpcomingDays from './UpcomingDays'
 
 const myAPIKey = 'dce6d076b7a2ffe64e08efe5ff779fa3'
+let fetchedData = {}
 
 class Widget extends React.Component {
   constructor(props) {
@@ -14,29 +16,80 @@ class Widget extends React.Component {
       temperature: undefined,
       humidity: undefined,
       description: undefined,
+      day1: undefined,
+      day2: undefined,
+      day3: undefined,
+      day4: undefined,
+      day5: undefined,
       error: undefined,
     }
   }
 
   getWeatherData(event) {
     event.preventDefault()
-    let fetchedData = {}
+
     const city = event.target.elements.city.value
     const country = event.target.elements.country.value
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${myAPIKey}&units=metric`)
-      .then((e) => e.json())
-      .then((data) => {
-        console.log(data)
-        fetchedData = data
-        this.setState({
-          city: data.name,
-          country: data.sys.country,
-          temperature: data.main.temp,
-          humidity: data.main.humidity,
-          description: data.weather[0].description,
-          error: '',
+
+    if (city && country) {
+      fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${myAPIKey}&units=metric`)
+        .then((e) => e.json())
+        .then((data) => {
+          if (data.cod == '404') {
+            this.setState({
+              city: undefined,
+              country: undefined,
+              temperature: undefined,
+              humidity: undefined,
+              description: undefined,
+              day1: undefined,
+              day2: undefined,
+              day3: undefined,
+              day4: undefined,
+              day5: undefined,
+              error: data.message,
+            })
+          } else {
+            fetchedData = data
+            this.setState({
+              city: data.name,
+              country: data.sys.country,
+              temperature: data.main.temp,
+              humidity: data.main.humidity,
+              description: data.weather[0].description,
+              error: '',
+            })
+          }
         })
+      fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${myAPIKey}&units=metric`)
+        .then((e) => e.json())
+        .then((data) => {
+          //console.log(data)
+          this.setState({
+            day1: data.list[7],
+            day2: data.list[15],
+            day3: data.list[23],
+            day4: data.list[31],
+            day5: data.list[39],
+          })
+          console.log(this.state)
+        })
+    } else {
+      this.setState({
+        city: undefined,
+        country: undefined,
+        temperature: undefined,
+        humidity: undefined,
+        description: undefined,
+        day1: undefined,
+        day2: undefined,
+        day3: undefined,
+        day4: undefined,
+        day5: undefined,
+        error: 'Please enter the city and country code.',
       })
+      console.log(this.state)
+    }
   }
 
   render() {
@@ -46,7 +99,15 @@ class Widget extends React.Component {
         <h2>Find out now!</h2>
         <div>
           <Form getWeatherData={this.getWeatherData} />
-          <WeatherDetails />
+          <WeatherDetails
+            city={this.state.city}
+            country={this.state.country}
+            temperature={this.state.temperature}
+            humidity={this.state.humidity}
+            description={this.state.description}
+            error={this.state.error}
+          />
+          <UpcomingDays />
         </div>
       </div>
     )

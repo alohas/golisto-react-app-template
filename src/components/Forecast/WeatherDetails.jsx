@@ -2,7 +2,20 @@ import React from 'react'
 
 class WeatherDetails extends React.Component {
   render() {
-    return <h5>hello</h5>
+    return (
+      <div>
+        {this.props.city && this.props.country && (
+          <p>
+            Location: {this.props.city}, {this.props.country}
+          </p>
+        )}
+        {this.props.temperature && <p>Temperature: {this.props.temperature}</p>}
+        {this.props.humidity && <p>Humidity: {this.props.humidity}</p>}
+        {this.props.humidity && <p>Conditions: {this.props.description}</p>}
+
+        {this.props.error && <p>{this.props.error}</p>}
+      </div>
+    )
   }
 }
 
