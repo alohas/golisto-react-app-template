@@ -1,0 +1,8 @@
+.WeatherApp {
+  width: 80%;
+  &__Display {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 1fr;
+  }
+}

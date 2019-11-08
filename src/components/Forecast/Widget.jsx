@@ -3,6 +3,8 @@ import Form from './Form'
 import WeatherDetails from './WeatherDetails'
 import UpcomingDays from './UpcomingDays'
 
+import './Widget.scss'
+
 const myAPIKey = 'dce6d076b7a2ffe64e08efe5ff779fa3'
 
 class Widget extends React.Component {
@@ -15,6 +17,7 @@ class Widget extends React.Component {
       temperature: undefined,
       humidity: undefined,
       description: undefined,
+      icon: undefined,
       day1: undefined,
       day2: undefined,
       day3: undefined,
@@ -30,6 +33,9 @@ class Widget extends React.Component {
     const city = event.target.elements.city.value
     const country = event.target.elements.country.value
 
+    event.target.elements.city.value = ''
+    event.target.elements.country.value = ''
+
     if (city && country) {
       fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${myAPIKey}&units=metric`)
         .then((e) => e.json())
@@ -41,6 +47,7 @@ class Widget extends React.Component {
               temperature: undefined,
               humidity: undefined,
               description: undefined,
+              icon: undefined,
               day1: undefined,
               day2: undefined,
               day3: undefined,
@@ -49,12 +56,14 @@ class Widget extends React.Component {
               error: data.message,
             })
           } else {
+            console.log(data)
             this.setState({
               city: data.name,
               country: data.sys.country,
               temperature: data.main.temp,
               humidity: data.main.humidity,
               description: data.weather[0].description,
+              icon: data.weather[0].icon,
               error: '',
             })
           }
@@ -79,6 +88,7 @@ class Widget extends React.Component {
         temperature: undefined,
         humidity: undefined,
         description: undefined,
+        icon: undefined,
         day1: undefined,
         day2: undefined,
         day3: undefined,
@@ -92,10 +102,10 @@ class Widget extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="WeatherApp">
         <h1>What is the weather? </h1>
         <h2>Find out now!</h2>
-        <div>
+        <div className="WeatherApp__Display">
           <Form getWeatherData={this.getWeatherData} />
 
           <WeatherDetails
@@ -104,6 +114,7 @@ class Widget extends React.Component {
             temperature={this.state.temperature}
             humidity={this.state.humidity}
             description={this.state.description}
+            icon={this.state.icon}
             error={this.state.error}
           />
           <UpcomingDays day1={this.state.day1} day2={this.state.day2} day3={this.state.day3} day4={this.state.day4} day5={this.state.day5} />
