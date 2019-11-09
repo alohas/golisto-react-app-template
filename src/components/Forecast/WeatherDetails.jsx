@@ -1,4 +1,5 @@
 import React from 'react'
+import './WeatherDetail.scss'
 
 class WeatherDetails extends React.Component {
   render() {
@@ -7,18 +8,19 @@ class WeatherDetails extends React.Component {
       icon = `http://openweathermap.org/img/wn/${this.props.icon}@2x.png`
     }
     return (
-      <div>
+      <div className="Today">
         {this.props.city && this.props.country && (
           <h3>
-            Location: {this.props.city}, {this.props.country}
+            {this.props.city}, {this.props.country}
           </h3>
         )}
         {this.props.city && this.props.country && <h4>Today</h4>}
         {this.props.temperature && (
           <p>
-            <img width="50px" height="50px" src={icon} alt="icon" /> {this.props.temperature}°C
+            <img width="100px" height="100px" src={icon} alt="icon" />
           </p>
         )}
+        {this.props.temperature && <p>{Math.round(this.props.temperature)}°C</p>}
         {this.props.humidity && <p>Humidity: {this.props.humidity}%</p>}
         {this.props.humidity && <p>Conditions: {this.props.description}</p>}
 

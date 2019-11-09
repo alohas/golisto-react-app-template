@@ -1,8 +1,12 @@
 .WeatherApp {
   width: 80%;
+  padding: 50px 15px 15px 15px;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.55);
   &__Display {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr max-content;
   }
 }

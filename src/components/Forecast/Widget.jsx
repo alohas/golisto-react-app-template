@@ -12,6 +12,7 @@ class Widget extends React.Component {
     super(props)
     this.getWeatherData = this.getWeatherData.bind(this)
     this.state = {
+      isClicked: false,
       city: undefined,
       country: undefined,
       temperature: undefined,
@@ -42,6 +43,8 @@ class Widget extends React.Component {
         .then((data) => {
           if (data.cod == '404') {
             this.setState({
+              isClicked: true,
+              cityFound: false,
               city: undefined,
               country: undefined,
               temperature: undefined,
@@ -66,23 +69,26 @@ class Widget extends React.Component {
               icon: data.weather[0].icon,
               error: '',
             })
+            fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${myAPIKey}&units=metric`)
+              .then((e) => e.json())
+              .then((data) => {
+                //console.log(data)
+                this.setState({
+                  cityFound: true,
+                  isClicked: true,
+                  day1: data.list[7],
+                  day2: data.list[15],
+                  day3: data.list[23],
+                  day4: data.list[31],
+                  day5: data.list[39],
+                })
+                //console.log(this.state)
+              })
           }
-        })
-      fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${myAPIKey}&units=metric`)
-        .then((e) => e.json())
-        .then((data) => {
-          //console.log(data)
-          this.setState({
-            day1: data.list[7],
-            day2: data.list[15],
-            day3: data.list[23],
-            day4: data.list[31],
-            day5: data.list[39],
-          })
-          //console.log(this.state)
         })
     } else {
       this.setState({
+        isClicked: true,
         city: undefined,
         country: undefined,
         temperature: undefined,
@@ -103,20 +109,22 @@ class Widget extends React.Component {
   render() {
     return (
       <div className="WeatherApp">
-        <h1>What is the weather? </h1>
-        <h2>Find out now!</h2>
+        <h1>The Forecast Page </h1>
+        <h2>Insert the name of the city and country code bellow to find out the weather!</h2>
         <div className="WeatherApp__Display">
-          <Form getWeatherData={this.getWeatherData} />
+          {!this.state.cityFound && <Form getWeatherData={this.getWeatherData} isClicked={this.state.isClicked} error={this.state.error} />}
 
-          <WeatherDetails
-            city={this.state.city}
-            country={this.state.country}
-            temperature={this.state.temperature}
-            humidity={this.state.humidity}
-            description={this.state.description}
-            icon={this.state.icon}
-            error={this.state.error}
-          />
+          {this.state.cityFound && (
+            <WeatherDetails
+              city={this.state.city}
+              country={this.state.country}
+              temperature={this.state.temperature}
+              humidity={this.state.humidity}
+              description={this.state.description}
+              icon={this.state.icon}
+            />
+          )}
+
           <UpcomingDays day1={this.state.day1} day2={this.state.day2} day3={this.state.day3} day4={this.state.day4} day5={this.state.day5} />
         </div>
       </div>
