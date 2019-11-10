@@ -3,7 +3,70 @@
   margin: 10px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.55);
   border-radius: 4px;
-  h3 {
+  background-color: #b2c5ce;
+  &__Location {
+    margin: 0;
+    font-weight: 800;
+  }
+  &__When {
+    font-weight: 700;
+    margin: 0 0 20px 0;
+  }
+  &__Desc {
+    text-transform: capitalize;
+    font-size: 23px;
+    margin-bottom: 0;
+  }
+  &__Icon {
+    margin: 0;
+  }
+  &__Temp {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 50px;
     margin-top: 0;
+    margin-bottom: 0;
+  }
+  &__Humi {
+    margin-bottom: 0;
+    font-size: 23px;
+    &-span {
+      font-weight: 600;
+    }
+  }
+  &__Wind {
+    margin: 0;
+    margin-top: 20px;
+    font-size: 23px;
+    &-span {
+      font-weight: 600;
+    }
+    &-dir {
+      font-weight: 600;
+    }
+  }
+  &__Press {
+    margin: 0;
+    margin-top: 20px;
+    font-size: 23px;
+    &-span {
+      font-weight: 600;
+    }
+  }
+  &__Sunrise {
+    margin: 0;
+    margin-top: 20px;
+    font-size: 23px;
+    &-span {
+      font-weight: 600;
+    }
+  }
+  &__Sunset {
+    margin: 0;
+    margin-top: 20px;
+    font-size: 23px;
+    &-span {
+      font-weight: 600;
+    }
   }
 }

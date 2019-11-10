@@ -1,5 +1,5 @@
 import React from 'react'
-import './UpcomingDays.scss'
+import './Day.scss'
 
 class ADay extends React.Component {
   render() {
@@ -15,10 +15,10 @@ class ADay extends React.Component {
           {d && <h5>{d.toDateString().substring(0, 10)}</h5>}
           {this.props.details.weather[0].icon && <p className="Upcoming__Day-img-container"> {<img src={icon} width="50" height="50" alt="icon" />}</p>}
           {this.props.details.main.temp && <p className="Upcoming__Day-temp">{Math.round(this.props.details.main.temp)}°C</p>}
-          {this.props.details.weather[0].description && <p>{this.props.details.weather[0].description}</p>}
-          {this.props.details.wind.speed && <p>{this.props.details.wind.speed} m/s</p>}
+          {this.props.details.weather[0].description && <p className="Upcoming__Day-detail">{this.props.details.weather[0].description}</p>}
+          {this.props.details.wind.speed && <p className="Upcoming__Day-detail">{this.props.details.wind.speed} m/s</p>}
           {this.props.details.main.pressure && (
-            <p>
+            <p className="Upcoming__Day-detail">
               Clouds: {this.props.details.clouds.all}%, {this.props.details.main.pressure} hpa
             </p>
           )}

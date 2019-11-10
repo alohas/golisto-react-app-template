@@ -1,0 +1,23 @@
+.Upcoming__Day {
+  margin: 10px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.55);
+  border-radius: 4px;
+  text-align: center;
+  background-color: #b2c5ce;
+  padding: 0 5px;
+  h5 {
+    margin: 10px 0;
+  }
+  &-temp {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  &-img-container {
+    margin: 0;
+  }
+  &-detail {
+    margin: 10px 0;
+  }
+}

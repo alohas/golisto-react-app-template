@@ -20,6 +20,10 @@ class Widget extends React.Component {
       temperature: undefined,
       humidity: undefined,
       description: undefined,
+      wind: undefined,
+      pressure: undefined,
+      sunrise: undefined,
+      sunrise: undefined,
       icon: undefined,
       day1: undefined,
       day2: undefined,
@@ -32,7 +36,7 @@ class Widget extends React.Component {
 
   getWeatherData(event) {
     event.preventDefault()
-    console.log(event.target.elements)
+
     const city = event.target.elements.city.value
     const country = event.target.elements.country.value
 
@@ -52,6 +56,10 @@ class Widget extends React.Component {
               temperature: undefined,
               humidity: undefined,
               description: undefined,
+              wind: undefined,
+              pressure: undefined,
+              sunrise: undefined,
+              sunrise: undefined,
               icon: undefined,
               day1: undefined,
               day2: undefined,
@@ -69,6 +77,10 @@ class Widget extends React.Component {
               humidity: data.main.humidity,
               description: data.weather[0].description,
               icon: data.weather[0].icon,
+              wind: data.wind,
+              pressure: data.main.pressure,
+              sunrise: data.sys.sunrise,
+              sunset: data.sys.sunset,
               error: '',
             })
             fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${myAPIKey}&units=metric`)
@@ -96,6 +108,10 @@ class Widget extends React.Component {
         temperature: undefined,
         humidity: undefined,
         description: undefined,
+        wind: undefined,
+        pressure: undefined,
+        sunrise: undefined,
+        sunrise: undefined,
         icon: undefined,
         day1: undefined,
         day2: undefined,
@@ -115,9 +131,9 @@ class Widget extends React.Component {
   render() {
     return (
       <div className="WeatherApp">
-        <h1>The WeatherApp</h1>
+        <h1 className="WeatherApp__Heading">Weather Forecast</h1>
 
-        {!this.state.cityFound && <h5>Enter the name of the city and country code!</h5>}
+        {!this.state.cityFound && <h5 className="WeatherApp__SubHeading">Enter the name of the city and country code!</h5>}
         {this.state.cityFound && (
           <button onClick={this.goback} className="back">
             Go back
@@ -134,6 +150,10 @@ class Widget extends React.Component {
               humidity={this.state.humidity}
               description={this.state.description}
               icon={this.state.icon}
+              wind={this.state.wind}
+              pressure={this.state.pressure}
+              sunrise={this.state.sunrise}
+              sunset={this.state.sunset}
             />
           )}
           {this.state.cityFound && <UpcomingDays day1={this.state.day1} day2={this.state.day2} day3={this.state.day3} day4={this.state.day4} day5={this.state.day5} />}
