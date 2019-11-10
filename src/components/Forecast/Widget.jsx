@@ -11,7 +11,9 @@ class Widget extends React.Component {
   constructor(props) {
     super(props)
     this.getWeatherData = this.getWeatherData.bind(this)
+    this.goback = this.goback.bind(this)
     this.state = {
+      cityFound: false,
       isClicked: false,
       city: undefined,
       country: undefined,
@@ -30,7 +32,7 @@ class Widget extends React.Component {
 
   getWeatherData(event) {
     event.preventDefault()
-
+    console.log(event.target.elements)
     const city = event.target.elements.city.value
     const country = event.target.elements.country.value
 
@@ -106,11 +108,21 @@ class Widget extends React.Component {
     }
   }
 
+  goback() {
+    this.setState({ cityFound: false })
+  }
+
   render() {
     return (
       <div className="WeatherApp">
-        <h1>The Forecast Page </h1>
-        <h2>Insert the name of the city and country code bellow to find out the weather!</h2>
+        <h1>The WeatherApp</h1>
+
+        {!this.state.cityFound && <h5>Enter the name of the city and country code!</h5>}
+        {this.state.cityFound && (
+          <button onClick={this.goback} className="back">
+            Go back
+          </button>
+        )}
         <div className="WeatherApp__Display">
           {!this.state.cityFound && <Form getWeatherData={this.getWeatherData} isClicked={this.state.isClicked} error={this.state.error} />}
 
@@ -124,8 +136,7 @@ class Widget extends React.Component {
               icon={this.state.icon}
             />
           )}
-
-          <UpcomingDays day1={this.state.day1} day2={this.state.day2} day3={this.state.day3} day4={this.state.day4} day5={this.state.day5} />
+          {this.state.cityFound && <UpcomingDays day1={this.state.day1} day2={this.state.day2} day3={this.state.day3} day4={this.state.day4} day5={this.state.day5} />}
         </div>
       </div>
     )
