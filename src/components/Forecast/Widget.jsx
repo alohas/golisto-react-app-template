@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
-import Form from './Form'
-import WeatherDetails from './WeatherDetails'
-import UpcomingDays from './UpcomingDays'
+import React from 'react'
+import Form from './Form/Form'
+import WeatherDetailsToday from './WeatherDetailsToday/WeatherDetailsToday'
+import FiveDayForecast from './FiveDayForecast/FiveDayForecast'
 
 import './Widget.scss'
 
@@ -77,7 +77,6 @@ class Widget extends React.Component {
               error: data.message,
             })
           } else {
-            console.log(data)
             this.setState({
               city: data.name,
               country: data.sys.country,
@@ -94,7 +93,6 @@ class Widget extends React.Component {
             fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${myAPIKey}&units=metric`)
               .then((e) => e.json())
               .then((data) => {
-                console.log(data)
                 this.setState({
                   cityFound: true,
                   isClicked: true,
@@ -108,7 +106,6 @@ class Widget extends React.Component {
                   day4: data.list[31],
                   day5: data.list[39],
                 })
-                //console.log(this.state)
               })
           }
         })
@@ -136,7 +133,6 @@ class Widget extends React.Component {
         day5: undefined,
         error: 'Please enter the city and country code.',
       })
-      //console.log(this.state)
     }
   }
 
@@ -159,7 +155,7 @@ class Widget extends React.Component {
           {!this.state.cityFound && <Form getWeatherData={this.getWeatherData} isClicked={this.state.isClicked} error={this.state.error} />}
 
           {this.state.cityFound && (
-            <WeatherDetails
+            <WeatherDetailsToday
               city={this.state.city}
               country={this.state.country}
               temperature={this.state.temperature}
@@ -176,7 +172,7 @@ class Widget extends React.Component {
               in12hours={this.state.in12hours}
             />
           )}
-          {this.state.cityFound && <UpcomingDays day1={this.state.day1} day2={this.state.day2} day3={this.state.day3} day4={this.state.day4} day5={this.state.day5} />}
+          {this.state.cityFound && <FiveDayForecast day1={this.state.day1} day2={this.state.day2} day3={this.state.day3} day4={this.state.day4} day5={this.state.day5} />}
         </div>
       </div>
     )

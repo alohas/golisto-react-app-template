@@ -1,5 +1,5 @@
 import React from 'react'
-import './Inhours.scss'
+import './UpcomingHours.scss'
 
 class Inhours extends React.Component {
   render() {

@@ -1,6 +1,6 @@
 import React from 'react'
-import ADay from './Day'
-import './UpcomingDays.scss'
+import ADay from './ADay/ADay'
+import './FiveDayForecast.scss'
 
 class upcomingDays extends React.Component {
   render() {

@@ -1,5 +1,5 @@
 import React from 'react'
-import './Day.scss'
+import './ADay.scss'
 
 class ADay extends React.Component {
   render() {

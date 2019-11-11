@@ -1,6 +1,6 @@
 import React from 'react'
-import Inhours from './Inhours'
-import './WeatherDetails.scss'
+import Inhours from './UpcomingHours/UpcomingHours'
+import './WeatherDetailsToday.scss'
 
 class WeatherDetails extends React.Component {
   render() {
