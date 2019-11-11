@@ -25,6 +25,10 @@ class Widget extends React.Component {
       sunrise: undefined,
       sunrise: undefined,
       icon: undefined,
+      in3hours: undefined,
+      in6hours: undefined,
+      in9hours: undefined,
+      in12hours: undefined,
       day1: undefined,
       day2: undefined,
       day3: undefined,
@@ -61,6 +65,10 @@ class Widget extends React.Component {
               sunrise: undefined,
               sunrise: undefined,
               icon: undefined,
+              in3hours: undefined,
+              in6hours: undefined,
+              in9hours: undefined,
+              in12hours: undefined,
               day1: undefined,
               day2: undefined,
               day3: undefined,
@@ -86,10 +94,14 @@ class Widget extends React.Component {
             fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${myAPIKey}&units=metric`)
               .then((e) => e.json())
               .then((data) => {
-                //console.log(data)
+                console.log(data)
                 this.setState({
                   cityFound: true,
                   isClicked: true,
+                  in3hours: data.list[0],
+                  in6hours: data.list[1],
+                  in9hours: data.list[2],
+                  in12hours: data.list[3],
                   day1: data.list[7],
                   day2: data.list[15],
                   day3: data.list[23],
@@ -113,6 +125,10 @@ class Widget extends React.Component {
         sunrise: undefined,
         sunrise: undefined,
         icon: undefined,
+        in3hours: undefined,
+        in6hours: undefined,
+        in9hours: undefined,
+        in12hours: undefined,
         day1: undefined,
         day2: undefined,
         day3: undefined,
@@ -154,6 +170,10 @@ class Widget extends React.Component {
               pressure={this.state.pressure}
               sunrise={this.state.sunrise}
               sunset={this.state.sunset}
+              in3hours={this.state.in3hours}
+              in6hours={this.state.in6hours}
+              in9hours={this.state.in9hours}
+              in12hours={this.state.in12hours}
             />
           )}
           {this.state.cityFound && <UpcomingDays day1={this.state.day1} day2={this.state.day2} day3={this.state.day3} day4={this.state.day4} day5={this.state.day5} />}

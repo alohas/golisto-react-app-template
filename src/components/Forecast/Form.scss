@@ -1,22 +1,26 @@
+@import 'src/styles/mixins/breakpoints.scss';
+
 form {
   font-family: 'Source Sans Pro', sans-serif;
   margin: 0;
   .formWrap {
-    width: 50%;
+    width: 80%;
     position: relative;
-    height: 50px;
+    height: 70px;
     overflow: hidden;
     margin-bottom: 15px;
+
     &__input {
       outline: none;
       width: 100%;
       height: 100%;
       padding-top: 20px;
       border: none;
+      font-size: 25px;
       &:focus {
         & + .formWrap__label .formWrap__label-span {
           transform: translateY(-150%);
-          font-size: 14px;
+          font-size: 20px;
           color: #7197a7;
           transition: transform 0.3s ease;
         }
@@ -24,7 +28,7 @@ form {
       &:valid {
         & + .formWrap__label .formWrap__label-span {
           transform: translateY(-150%);
-          font-size: 14px;
+          font-size: 20px;
           color: #7197a7;
         }
       }
@@ -48,6 +52,7 @@ form {
       height: 100%;
       pointer-events: none;
       border-bottom: 1px solid black;
+      font-size: 25px;
       &-span {
         position: absolute;
         bottom: 5px;
@@ -64,6 +69,7 @@ form {
       bottom: -1px;
       border-bottom: 3px solid #7197a7;
       transform: translate(-100%);
+      transition: all 0.3s ease;
     }
   }
   button {
@@ -87,5 +93,20 @@ form {
     &:focus {
       background-color: #88b4c7;
     }
+  }
+  .error-message {
+    text-transform: uppercase;
+    background-color: rgb(252, 67, 67);
+    padding: 25px;
+    color: white;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 15px;
+    outline: none;
+    font-family: Source Sans Pro, sans-serif;
+    font-weight: 700;
+    color: white;
+    max-width: 280px;
+    border-radius: 4px;
   }
 }

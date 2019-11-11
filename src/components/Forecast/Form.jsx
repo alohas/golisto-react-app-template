@@ -5,6 +5,7 @@ class Form extends React.Component {
   render() {
     return (
       <form onSubmit={this.props.getWeatherData}>
+        {this.props.error && <p className="error-message">{this.props.error}</p>}
         <div className="formWrap">
           <input className="formWrap__input" type="text" name="city" autoComplete="off" required />
           <label htmlFor="city" className="formWrap__label">
@@ -18,7 +19,6 @@ class Form extends React.Component {
           </label>
         </div>
         <button>Get Forecast</button>
-        {this.props.error && <p className="error-message">{this.props.error}</p>}
       </form>
     )
   }

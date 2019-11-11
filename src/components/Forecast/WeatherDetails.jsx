@@ -1,5 +1,6 @@
 import React from 'react'
-import './WeatherDetail.scss'
+import Inhours from './Inhours'
+import './WeatherDetails.scss'
 
 class WeatherDetails extends React.Component {
   render() {
@@ -9,6 +10,8 @@ class WeatherDetails extends React.Component {
     }
     let rised = new Date(this.props.sunrise * 1000).toTimeString().substring(0, 5)
     let setd = new Date(this.props.sunset * 1000).toTimeString().substring(0, 5)
+
+    let today = new Date()
 
     let windDirection = undefined
     if (this.props.wind.deg == 350 || this.props.wind.deg == 360 || this.props.wind.deg == 10) {
@@ -47,44 +50,53 @@ class WeatherDetails extends React.Component {
 
     return (
       <div className="Today">
-        {this.props.city && this.props.country && (
-          <h3 className="Today__Location">
-            {this.props.city}, {this.props.country}
-          </h3>
-        )}
-        {this.props.city && this.props.country && <h4 className="Today__When">Today</h4>}
-        {this.props.description && <p className="Today__Desc">{this.props.description}</p>}
-        {this.props.temperature && (
-          <p className="Today__Icon">
-            <img width="100px" height="100px" src={icon} alt="icon" />
-          </p>
-        )}
-        {this.props.temperature && <p className="Today__Temp">{Math.round(this.props.temperature)}°C</p>}
-        {this.props.humidity && (
-          <p className="Today__Humi">
-            <span className="Today__Humi-span">Humidity:</span> {this.props.humidity}%
-          </p>
-        )}
-        {this.props.wind && (
-          <p className="Today__Wind">
-            <span className="Today__Wind-span">Wind:</span> {this.props.wind.speed} m/s <span className="Today__Wind-dir">{windDirection}</span>
-          </p>
-        )}
-        {this.props.pressure && (
-          <p className="Today__Press">
-            <span className="Today__Press-span">Pressure:</span> {this.props.pressure}hpa
-          </p>
-        )}
-        {this.props.sunrise && (
-          <p className="Today__Sunrise">
-            <span className="Today__Sunrise-span">Sunrise:</span> {rised}
-          </p>
-        )}
-        {this.props.sunset && (
-          <p className="Today__Sunset">
-            <span className="Today__Sunset-span">Sunset:</span> {setd}
-          </p>
-        )}
+        <div className="Today__details">
+          {this.props.city && this.props.country && (
+            <h3 className="Today__Location">
+              {this.props.city}, {this.props.country}
+            </h3>
+          )}
+          {this.props.city && this.props.country && <h4 className="Today__When-date">{new Date().toDateString().substring(0, 10)}</h4>}
+          {this.props.city && this.props.country && <h4 className="Today__When-time">{new Date().toTimeString().substring(0, 5)}</h4>}
+          {this.props.description && <p className="Today__Desc">{this.props.description}</p>}
+          {this.props.temperature && (
+            <p className="Today__Icon">
+              <img width="100px" height="100px" src={icon} alt="icon" />
+            </p>
+          )}
+          {this.props.temperature && <p className="Today__Temp">{Math.round(this.props.temperature)}°C</p>}
+          {this.props.humidity && (
+            <p className="Today__Humi">
+              <span className="Today__Humi-span">Humidity:</span> {this.props.humidity}%
+            </p>
+          )}
+          {this.props.wind && (
+            <p className="Today__Wind">
+              <span className="Today__Wind-span">Wind:</span> {this.props.wind.speed} m/s <span className="Today__Wind-dir">{windDirection}</span>
+            </p>
+          )}
+          {this.props.pressure && (
+            <p className="Today__Press">
+              <span className="Today__Press-span">Pressure:</span> {this.props.pressure}hpa
+            </p>
+          )}
+          {this.props.sunrise && (
+            <p className="Today__Sunrise">
+              <span className="Today__Sunrise-span">Sunrise:</span> {rised}
+            </p>
+          )}
+          {this.props.sunset && (
+            <p className="Today__Sunset">
+              <span className="Today__Sunset-span">Sunset:</span> {setd}
+            </p>
+          )}
+        </div>
+        <div className="Today__hourly">
+          <Inhours data={this.props.in3hours} />
+          <Inhours data={this.props.in6hours} />
+          <Inhours data={this.props.in9hours} />
+          <Inhours data={this.props.in12hours} />
+        </div>
       </div>
     )
   }
