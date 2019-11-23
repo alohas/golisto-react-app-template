@@ -23,7 +23,7 @@ yarn start
 
 The structure borrows heavily from the final structure of the now deprecated [react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit).
 
-### Legacy
+### Legend
 
 - Any `index.jsx` file without a description will have only one job: "Export all the components from the folder, that the rest of the app needs to know about"
 - Any `<Name>.scss` file without a description, will contain all the styles of the `.jsx` file with the same name, and is imported by that same `.jsx` file. This is also always optional.
@@ -71,6 +71,94 @@ The structure borrows heavily from the final structure of the now deprecated [re
     └─ styles                         # Sass helpers and "settings", like variables and mixins
 
 † optional
+```
+
+## Naming
+
+### Files
+
+Generally all files and folders are named using:
+
+```
+camelCase
+```
+
+However, folders containing React components, React component `.jsx` files, and their companion `.scss` files are named using:
+
+```
+PascalCase
+```
+
+Another special case are Sass part files that should not be used directly, but only ever imported. In accordance to the Scss spec, these files should be prefixed with an `_`, and named using:
+
+```
+_camelCase
+```
+
+### JavaScript
+
+#### Variables
+
+```javascript
+let camelCase = 0
+```
+
+#### Constants
+
+```javascript
+const SCREAMING_SNAKE_CASE = 0
+```
+
+One may wish to make something akin to an enum, in such case it would be named as such:
+
+```javascript
+const PascalCase = {
+  SCREAMING_SNAKE_CASE: 0,
+}
+```
+
+#### Functions
+
+Casing for functions are the same as for variables, but we believe that modern IDEs quickly eases any confusion.
+
+```javascript
+function camelCase() {}
+```
+
+```javascript
+const camelCase = () => {}
+```
+
+#### Classes & Functional components
+
+```javascript
+class PascalCase {}
+```
+
+```javascript
+function PascalCase() {}
+```
+
+### Sass
+
+#### Ids
+
+```scss
+#PascalCase {
+}
+```
+
+#### Classes
+
+```scss
+.kebab-case {
+}
+```
+
+#### Variables
+
+```scss
+$camelCase: 0;
 ```
 
 ## Editor
